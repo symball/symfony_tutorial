@@ -39,7 +39,7 @@ echo "Starting up Docker environment"
 docker-compose up -d
 
 # Wait until docker is available
-until docker exec -t firstworldtest_project_toolchain_1 ls -la > /dev/null 2>&1; do sleep 2; done
+until docker exec -t symfonytutorial_project_toolchain_1 ls -la > /dev/null 2>&1; do sleep 2; done
 
 echo "Docker environment is up and running"
 
@@ -58,5 +58,5 @@ echo "docker-compose up"
 echo "In the future, to get a shell in the toolchain, once Docker is up"
 echo "docker exec -it firstworldtest_project_toolchain_1 bash"
 echo "### END NOTES ###"
-echo "Ready for you to run. Getting an interactive shell prompt in the project directory. Try running phing!"
+echo "Ready for you to run. Getting an interactive shell prompt in the project directory"
 docker exec -it symfonytutorial_project_toolchain_1 bash
