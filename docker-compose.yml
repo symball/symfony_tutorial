@@ -26,6 +26,8 @@ services:
       - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     links:
       - phpfpm
+    depends_on:
+      - phpfpm
 
   phpfpm:
     env_file: .env
