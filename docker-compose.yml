@@ -3,13 +3,11 @@ version: '2'
 services:
 
   project_toolchain:
-    env_file: .env
     build:
       context: docker/project_toolchain
       args:
         - USER_ID=${USER_ID}
         - GROUP_ID=${GROUP_ID}
-        - WEB_BASE=${WEB_BASE}
     image: symfony_tutorial/project_toolchain
     stdin_open: true
     tty: true
@@ -21,7 +19,7 @@ services:
   nginx:
     image: nginx:1.10.3-alpine
     ports:
-      - 8089:80
+      - 8086:80
     volumes_from:
      - project_toolchain
     volumes:
@@ -36,7 +34,6 @@ services:
       args:
         - USER_ID=${USER_ID}
         - GROUP_ID=${GROUP_ID}
-        - WEB_BASE=${WEB_BASE}
     image: symfony_tutorial/php_fpm
     links:
       - database
