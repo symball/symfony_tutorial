@@ -17,13 +17,10 @@ RUN touch /var/log/php-fpm.log
 RUN chown -R www-data:www-data /var/log/php-fpm.log
 
 # Copy across any overrides
-COPY php.conf /etc/php5/conf.d/99-overrides.conf
-# Overwrite the default PHP-FPM config as the default pool directive will by
-# default load after the extra includes making it awkward to edit the listen
-# address
-COPY php-fpm.conf /etc/php5/php-fpm.conf
+COPY php.conf /etc/php7/conf.d/99-overrides.conf
+COPY php-fpm.conf /etc/php7/php-fpm.conf
 
 USER www-data
 WORKDIR /var/www/html
 
-CMD ["php-fpm", "-F"]
+CMD ["php-fpm7", "-F"]
