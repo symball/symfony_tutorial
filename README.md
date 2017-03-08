@@ -16,23 +16,13 @@ Each Tutorial is represented by a different branch, with the master branch repre
 
 
 ## Running the code in Docker
-The Docker image set should be initialised using the shell script `initial.sh` which prepares the images in a fashion which will allow the project to run and allow you to edit the site locally without any permission errors. Once you have run the above script, the web environment can be brought up by running `docker-compose up`.
+The Docker image set should be initialised using the shell script `initial.sh` which:
 
-Due to the way Symfony projects are packaged, you are not ready yet. One of the containers running is named project_toolchain (a collection of tools to manage the project without needing to install locally) and you will run `composer install` from this container. In order to do that:
-
-```
-# Discover the name of the image, most likely symfony_tutorial_project_toolchain_1
-docker ps
-# Bring up a shell. Substitute symfony_tutorial_project_toolchain_1 if named differently
-docker exec -it symfony_tutorial_project_toolchain_1 bash
-# Run Composer install
-composer install
-```
-
-If (at the end of downloading the packages) Composer prompts you for some information, be sure to leave the database parameters as defaults, the parameters.yml.dist file has already been setup to connect for you. The only option recommended to change is the `secret`
+* Sets up the Docker environment for you
+* Performs the initial Symfony install
+* Gets you an interactive shell on the toolchain container
 
 ## Minor differences in Symfony project
 
 * The firewall in web/app_dev.php has been disabled so that the project can be properly accessed in a web browser
 * The default parameters.yml.dist has been modified so that the Database defaults are configured for use in Docker
-* Composer update has been run once, as of March 1st 2017
