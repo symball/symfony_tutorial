@@ -28,8 +28,25 @@ if exists docker-compose
   exit
 fi
 
+# Try and get the user ID
+USER_ID=$UID
+id_command='id -u'
+[ -z "$USER_ID" ] && USER_ID=$(id -u)
+
+# Try and use the script parameter if one exists
+[ -z "$USER_ID" ] && [ "$1" ] && USER_ID=$1
+fi
+
+if [ -z "$USER_ID" ]
+then
+  echo "Could not get User ID"
+  echo "Try finding your uid by running 'id' and relaunch this script appending the number on the end."
+  echo "e.g - sh initial.sh 1000"
+fi
+exit
+
 echo "Creating an environment file to use in docker build"
-echo "USER_ID=$UID" >> .env
+echo "USER_ID=$USER_ID" > .env
 echo "GROUP_ID=$(id -g)" >> .env
 
 echo "Building Docker files. This may take some time"
