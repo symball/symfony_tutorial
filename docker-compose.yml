@@ -3,6 +3,7 @@ version: '2'
 services:
 
   project_toolchain:
+    env_file: .env
     build:
       context: docker/project_toolchain
       args:
