@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @ORM\Table(name="comment")
  * @ORM\Entity()
@@ -22,10 +24,21 @@ class Comment
     private $post;
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank()
+     * @Assert\Email(
+     *  checkMX = true
+     * )
      */
     private $email;
     /**
      * @ORM\Column(name="body", type="text")
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 2000,
+     *      minMessage = "Your message must be longer than {{ limit }} characters",
+     *      maxMessage = "Your message cannot be longer than {{ limit }} characters"
+     * )
      */
     private $body;
     /**

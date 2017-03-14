@@ -32,6 +32,21 @@
 
 {% block navigation %}{% endblock %}
 {% block header %}{% endblock %}
+
+{% if app.session.flashBag.peek("alerts") is not empty %}
+  {# Create a wrapper for the notifications #}
+  <section id="notifications">
+    <div class="container">
+      <div class="row columns">
+        {# Start looping through the notifications #}
+        {% for msg in app.session.flashBag.get("alerts") %}
+        <div class="alert" role="alert">{{ msg }}</div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
 {% block body %}{% endblock %}
 {% block footer %}{% endblock %}
 
