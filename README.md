@@ -6,13 +6,13 @@ This repository includes all the resources you will need to follow the tutorial 
 
 Each Tutorial is represented by a different branch, with the master branch representing the initial state of a Symfony project (with some minor differences listed below) ready to be run in Docker.
 
-[part-1](https://www.simonball.me/p/making-your-first-pages)
+Making your First pages - [part-1](https://www.simonball.me/p/making-your-first-pages)
 
-[part-2](https://www.simonball.me/p/adding-persistent-data)
+Adding Persistent Data - [part-2](https://www.simonball.me/p/adding-persistent-data)
 
-[part-2](https://www.simonball.me/p/an-administration-interface)
+An Administration Interface [part-2](https://www.simonball.me/p/an-administration-interface)
 
-[part-4](https://www.simonball.me/p/user-interaction)
+User Interaction [part-4](https://www.simonball.me/p/user-interaction)
 
 
 ## Running the code in Docker
