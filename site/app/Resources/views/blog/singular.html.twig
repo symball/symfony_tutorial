@@ -1,0 +1,18 @@
+{# app/Resources/views/blog/singular.html.twig #}
+{% extends 'common.html.twig'%}
+
+{% block body %}
+<section id="portfolio">
+    <div class="container">
+        <div class="row">
+          <h1 class="page-header">
+            {{ post.title }}<br />
+            <small>{{ post.summary }}</small>
+          </h1>
+
+          {{ post.content|raw }}
+
+        </div>
+      </div>
+    </section>
+{% endblock %}
