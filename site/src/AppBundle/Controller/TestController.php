@@ -18,30 +18,11 @@ class TestController extends Controller
      */
     public function indexAction()
     {
-      // Get the entity manager which will handle the save operation
-      $em = $this->getDoctrine()->getManager();
 
-      $post = new Post();
-      $post->setTitle('First Post');
-      // Slash before DateTime for accessing global namespace
-      $post->setCreatedAt(new \DateTime());
-      $post->setSummary('A new channel has risen');
-      $post->setContent('<p>lorem</p>');
+      /* Use the service container to retrieve the blog manager */
+      $blogManager = $this->get('app.blog_manager');
 
-      // Telling Doctrine to save the object
-      $em->persist($post);
-
-      // You can create again once persisted
-      $post = new Post();
-      $post->setTitle('Who are we?');
-      $post->setCreatedAt(new \DateTime());
-      $post->setSummary('An update on what it is we do');
-      $post->setContent('<p>Content</p>');
-      $em->persist($post);
-
-      // Perform the actual database operation
-      $em->flush();
-
-      return new Response('Entity has been saved to the DB');
+      /* Return the output of test function as a response */
+      return new Response($blogManager->test());
     }
 }
