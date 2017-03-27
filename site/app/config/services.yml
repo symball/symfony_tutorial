@@ -4,8 +4,24 @@ parameters:
 #    parameter_name: value
 
 services:
-  app.blog_manager:
+
+  app.repository.post:
+    class: AppBundle\Repository\PostRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: [ AppBundle:Post ]
+
+  app.service.blog_manager:
     class: AppBundle\Service\BlogManager
+    arguments:
+      - '@app.repository.post'
+      - '@event_dispatcher'
+
+  app.event.listener.post_access_count_increment:
+    class: AppBundle\Event\Listener\PostAccessCountIncrementListener
+    tags:
+      - { name: kernel.event_listener, event: post.fetched, event: onPostFetch }
+    arguments:
+      - '@doctrine.orm.entity_manager'
 
   app.sonata.admin.post:
     class: AppBundle\Admin\PostAdmin

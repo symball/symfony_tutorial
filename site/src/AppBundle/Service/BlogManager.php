@@ -2,10 +2,44 @@
 
 namespace AppBundle\Service;
 
+use AppBundle\Repository\PostRepository;
+
+/* Include namespaces for type casting */
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+
+/* Include the event definition */
+use AppBundle\Event\PostFetchedEvent;
+
+
 class BlogManager
 {
-  public function test()
+  protected $postRepository;
+
+  /* The event dispatcher interface */
+  protected $eventDispatcher;
+
+  /* Notice the type forcing of the argument */
+  public function __construct(
+    PostRepository $postRepository,
+    EventDispatcherInterface $eventDispatcher)
   {
-    return 'This comes from your Blog service';
+    $this->postRepository = $postRepository;
+
+    /* Set the event dispatcher to an object property */
+    $this->eventDispatcher = $eventDispatcher;
+  }
+  public function fetchPosts()
+  {
+    return $this->postRepository->findAllOrderedByDate();
+  }
+  public function fetchPost($id)
+  {
+    if($post = $this->postRepository->find($id))
+    {
+      /* Inform the Symfony event listener that there is an event here */
+      $event = new PostFetchedEvent($post);
+      $this->eventDispatcher->dispatch(PostFetchedEvent::NAME, $event);
+      return $post;
+    }
   }
 }

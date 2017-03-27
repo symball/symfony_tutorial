@@ -4,7 +4,7 @@ namespace AppBundle\Entity;
 // Autoload the annotations for Data definition
 use Doctrine\ORM\Mapping as ORM;
 /**
-* @ORM\Entity
+* @ORM\Entity(repositoryClass="AppBundle\Repository\PostRepository")
 * @ORM\Table(name="post")
 */
 class Post
@@ -35,6 +35,10 @@ class Post
    * @ORM\OneToMany(targetEntity="Comment", mappedBy="post")
    */
    private $comments;
+   /**
+    * @ORM\Column(type="integer", options={"default" : 0})
+    */
+   private $accessCounter;
     /**
      * Constructor
      */
@@ -147,6 +151,30 @@ class Post
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * Set accessCounter
+     *
+     * @param integer $accessCounter
+     *
+     * @return Post
+     */
+    public function setAccessCounter($accessCounter)
+    {
+        $this->accessCounter = $accessCounter;
+
+        return $this;
+    }
+
+    /**
+     * Get accessCounter
+     *
+     * @return integer
+     */
+    public function getAccessCounter()
+    {
+        return $this->accessCounter;
     }
 
     /**

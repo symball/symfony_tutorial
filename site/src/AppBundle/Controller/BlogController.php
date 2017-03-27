@@ -19,11 +19,8 @@ class BlogController extends Controller
      */
     public function indexAction()
     {
-      // Select the appropriate entity as a source
-      $posts = $this->getDoctrine()
-      ->getRepository('AppBundle:Post')
-      // Use one of the built in methods
-      ->findAll();
+      $posts = $this->get('app.service.blog_manager')
+      ->fetchPosts();
 
       return $this->render("blog/index.html.twig", ["posts" => $posts]);
 
@@ -34,9 +31,8 @@ class BlogController extends Controller
      */
     public function singularAction($id, Request $request)
     {
-      $post = $this->getDoctrine()
-      ->getRepository('AppBundle:Post')
-      ->find($id);
+      $post = $this->get('app.service.blog_manager')
+      ->fetchPost($id);
 
       // Prepare a data object for use with the form
       $comment = new Comment();
