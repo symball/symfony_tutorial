@@ -25,5 +25,17 @@ class BlogController extends Controller
       return $this->render("blog/index.html.twig", ["posts" => $posts]);
 
     }
+    /**
+     * @Route("/blog/{id}", name="blog_singular")
+     */
+    public function singularAction($id)
+    {
+      $post = $this->getDoctrine()
+      ->getRepository('AppBundle:Post')
+      ->find($id);
+
+      // replace this example code with whatever you need
+      return $this->render('blog/singular.html.twig', ['post' => $post]);
+    }
 }
 

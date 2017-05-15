@@ -1,0 +1,24 @@
+{% extends 'common.html.twig'%}
+
+{% block splash %}
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1>{{ post.title }}</h1>
+          <p><small>{{ post.summary }}</small></p>
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        {{ post.content|raw }}
+      </div>
+    </div>
+  </div>
+{% endblock %}
