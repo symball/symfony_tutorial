@@ -12,7 +12,18 @@ class BlogController extends Controller
      */
     public function indexAction()
     {
-      return $this->render('blog/index.html.twig');
+      // Select the appropriate entity as a source
+      $posts = $this->getDoctrine()
+      ->getRepository('AppBundle:Post')
+      // Use one of the built in methods
+      ->findAll();
+
+      // Quick way to debug information from the controller
+      // dump($posts);
+      // die();
+
+      return $this->render("blog/index.html.twig", ["posts" => $posts]);
+
     }
 }
 
