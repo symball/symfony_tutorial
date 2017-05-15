@@ -38,6 +38,5 @@ class Post
    /**
     * @ORM\Column(type="integer", options={"default" : 0})
     */
-   private $accessCounter;
+   private $accessCounter = 0;
 }
-
