@@ -15,7 +15,9 @@ exists()
 }
 
 # Start by checking whether docker and docker-compose exist
+echo "###########################################"
 echo "### Checking whether needed tools found ###"
+echo "###########################################"
 if exists docker
   then echo "Docker found"
   else echo "Docker not found, exiting"
@@ -46,15 +48,18 @@ fi
 
 echo "#################################################"
 echo "### Creating user environment file for docker ###"
+echo "#################################################"
 echo "USER_ID=$USER_ID" > .env
 echo "GROUP_ID=$(id -g)" >> .env
 
 echo "######################################################"
 echo "### Building Docker files. This may take some time ###"
+echo "######################################################"
 docker-compose build
 
 echo "######################################"
 echo "### Starting up Docker environment ###"
+echo "######################################"
 docker-compose up -d
 
 # Wait until docker is available
@@ -62,16 +67,18 @@ until docker exec -t symfonytutorial_project_toolchain_1 ls -la > /dev/null 2>&1
 
 echo "################################"
 echo "### Running Composer install ###"
+echo "################################"
 docker exec -it symfonytutorial_project_toolchain_1 composer install --no-interaction
 
 echo "######################"
 echo "### Dumping Assets ###"
+echo "######################"
 docker exec -it symfonytutorial_project_toolchain_1 php bin/console assets:install --symlink --relative
 
 echo "####################################################"
 echo "### Ready...Getting shell in toolchain container ###"
-echo "############"
-echo "### INFO ###"
+echo "####################################################"
+echo "              --- USEFUL INFO ---"
 echo "# To get back to your parent system"
 echo "exit"
 echo "# To shutdown the environment, once you are back in your parent shell"
