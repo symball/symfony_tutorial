@@ -10,7 +10,7 @@ parameters:
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -68,3 +68,16 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+# Add as a first level configuration
+fos_user:
+  # ORM because we are using a relational database
+  db_driver: orm
+  # Which set of firewall rules will security incorporate with
+  firewall_name: main
+  # The User data object where user information will be stored
+  user_class: AppBundle\Entity\User
+  # Email communication settings
+  from_email:
+    address:        webmaster@example.com
+    sender_name:    Website Administrator
