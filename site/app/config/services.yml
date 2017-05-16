@@ -6,3 +6,14 @@ services:
     arguments: [~, AppBundle\Entity\Post, ~]
     calls:
       - [ setTranslationDomain, [AppBundle]]
+
+  app.repository.post:
+    class: AppBundle\Repository\PostRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: [ AppBundle:Post ]
+    public: false
+
+  app.service.blog_manager:
+    class: AppBundle\Service\BlogManager
+    arguments:
+      - '@app.repository.post'

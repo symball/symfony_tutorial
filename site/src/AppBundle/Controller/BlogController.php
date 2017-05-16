@@ -18,10 +18,7 @@ class BlogController extends Controller
     public function indexAction()
     {
       // Select the appropriate entity as a source
-      $posts = $this->getDoctrine()
-      ->getRepository('AppBundle:Post')
-      // Use one of the built in methods
-      ->findAll();
+      $posts = $this->get('app.service.blog_manager')->fetchPosts();
 
       // Quick way to debug information from the controller
       // dump($posts);
@@ -36,9 +33,7 @@ class BlogController extends Controller
      public function singularAction($id, Request $request)
      {
        /* Form definition */
-       $post = $this->getDoctrine()
-       ->getRepository('AppBundle:Post')
-       ->find($id);
+       $post = $this->get('app.service.blog_manager')->fetchPost($id);
 
        // Prepare a data object for use with the form
        $comment = new Comment();
