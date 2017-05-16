@@ -17,3 +17,11 @@ services:
     class: AppBundle\Service\BlogManager
     arguments:
       - '@app.repository.post'
+      - '@event_dispatcher'
+
+  app.event.listener.post_access_count_increment:
+    class: AppBundle\Event\Listener\PostAccessCountIncrementListener
+    tags:
+      - { name: kernel.event_listener, event: post.fetched, event: onPostFetch }
+    arguments:
+      - '@doctrine.orm.entity_manager'
